@@ -39,5 +39,10 @@ Examples (encoded URLs):
     http://localhost:8000/tswizzle?includeKeys=writer&&includeKeys=year
 -   All data for top 10 most played songs released since 2018:
     http://localhost:8000/tswizzle?sortKey=plays_total&sortReverse=true&maxCount=10&schema=%7B%22year%22%3A%7B%22minimum%22%3A2018%7D%7D
+    (schema = { year: { minimum: 2018 } })
 -   Least popular song from the album "1989" in August:
     http://localhost:8000/tswizzle?includeKeys=song&maxCount=1&sortKey=plays_august&schema=%7B%22album%22%3A%7B%22const%22%3A%221989%22%7D%7D
+    (schema = { album: { const: "1989" } })
+-   Songs beginning with the word "The", written in collaberation with others:
+    http://localhost:8000/tswizzle?includeKeys=song&includeKeys=writer&schema=%7B%22song%22%3A%7B%22pattern%22%3A%22%5EThe%5C%5Cs.*%22%7D%2C%22writer%22%3A%7B%22not%22%3A%7B%22const%22%3A%22Taylor%20Swift%22%7D%7D%7D
+    (schema = { song: { pattern: '^The\s.\*' }, writer: { not: { const: 'Taylor Swift' } } })
